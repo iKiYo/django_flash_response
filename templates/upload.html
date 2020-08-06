@@ -1,0 +1,36 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block extrahead %}
+<script>
+  $(function(){
+  $('.dropify').dropify();
+  })
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="upload container mt-3 pt-3">
+  <h3>自作問題のアップロード</h3>
+  <div class="container rounded status p-2">
+	<p>エクセルなどのCSVファイルから自作問題をまとめて登録することができます。</p>
+	<p>問題文やカテゴリ名などを以下のような順番にして作成してください。</p>
+	１：問題名、２：問題文（和文）、３：答えの文、４：カテゴリ名、５：サブカテゴリ名、６：詳細、７：文章体であるか（文章のみで使われる場合は、「文」などと列に記載してください。）
+	<hr>
+	<p>ファイルを選択してアップロードボタンを押すと自動的にアップロードされます。問題一覧で確認してください。</p>
+	<form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+	  {% csrf_token %}
+	  {{ form.as_ul }}
+	  <!-- <input type="file" class="dropify" data-default-file="ファイルを選択してください" name="csv"> -->
+	  {% if user.is_authenticated %}
+	  <button type="submit" class="btn btn-primary" name="button">アップロードを開始</button>
+	  {% else %}
+	  <a class="btn btn-outline-primary p-2" href="{% url 'signup' %}">アップロードを開始</a>
+	  {% endif %}
+
+	</form>
+	<hr>
+	<br>
+	<a class="btn btn-secondary btn-sm align-middle" href="{% url 'dashboard'%}">ホームに戻る</a>
+  </div>
+</div>
+{% endblock %}

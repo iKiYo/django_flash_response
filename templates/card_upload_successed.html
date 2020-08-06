@@ -1,0 +1,13 @@
+{% extends "_base.html" %}
+
+{% block title %}Upload Successed{% endblock title %}
+
+{% block content %}
+<div class="container mt-3 pt-3">
+  <h2>Upload Successed</h2>
+  <p>Your file has successfully been uploaded.</p>
+  <div class="container d-flex align-items-center mt-3 pt-3">
+	<a class="btn btn-primary btn-sm align-middle" href="{% url 'dashboard' %}">ホームに戻る</a>
+  </div>
+</div>
+{% endblock content %}

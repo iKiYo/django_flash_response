@@ -1,0 +1,51 @@
+{% extends "_base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block title %}Card Delete{% endblock title %}
+
+{% block content %}
+<div class="container mt-3 pt-3">
+  <h2>Card Delete</h2>
+  <div class="container rounded status p-2">
+	<h4> Card ID: {{ card.title }}</h4>
+	<a class="btn btn-secondary btn-sm align-middle" href="{% url 'card_detail' card.card_id %}">詳細に戻る</a>
+	<hr>
+	<div class="container">
+	  <div class="row">
+		<div class="col-8">
+		  <ul class="list-group list-group-flush bg-transparent">
+			<li class="list-group-item bg-transparent d-flex justify-content-left align-items-left">
+			  <span>カテゴリ：　{{ card.category }} / {{ card.subcategory }} / {{ card.detail }} </span>
+			  <!-- <span>カテゴリ：　{{ exercise.card.category }}</span> -->
+			  <!-- <span>サブカテゴリ：　{{ exercise.card.subcategory }}</span> -->
+			  <!-- <span>詳細カテゴリ:　{{ exercise.card.detail }}</span> -->
+			</li>
+			<li class="list-group-item bg-transparent">問題の文（和文）：　{{ card.question_text }}</li>
+			<li class="list-group-item bg-transparent">答えの文（英文）：　{{ card.answer_text }}</li>
+		  </ul>
+		</div>
+		<div class="col-4">
+		  <ul class="list-group list-group-flush bg-transparent ">
+			<li class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
+			  作成日<span>{{ card.creation_date }}</span></li>
+			{% if card.literacy_style %}
+			<li class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
+			  <span>文章体</span>
+			</li>
+			{% endif %}
+		  </ul>
+		</div>
+	  </div>
+	</div>
+	<hr>
+	<div class="container">
+	  <p>{% trans "Are you sure to delete this card?" %}</p>
+	  <form method="post">{% csrf_token %}
+		{{ form|crispy }}
+		<input class="btn btn-danger" type="submit" value="{% trans "Delete" %}">
+	  </form>
+	</div>
+  </div>
+</div>
+{% endblock content %}
+

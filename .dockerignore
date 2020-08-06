@@ -1,0 +1,8 @@
+.env
+.git
+.circleci
+*~
+*.backup
+*.log
+google_txt2spc.json
+application_default_credentials.json

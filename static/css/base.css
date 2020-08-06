@@ -1,0 +1,55 @@
+html{
+	min-height: 100%;
+ 	/* background: linear-gradient(to bottom right, #732673 50%, #ff99cc 100%); */
+	background: linear-gradient(to bottom right, #07053e 50%, #3f3f9e 100%);    font-family: Sans-serif, Noto Sans JP;
+	color: #ffffff;
+}
+body {
+	background-color: inherit;
+	color: white;
+}
+div.exercise-main{
+	background-color : white;
+	color: black;
+}
+footer {
+	position: relative;
+}
+div #exercise-area{
+    background: rgba(0,0,0,0.10);
+}
+
+div.container.rounded.status{
+    background: rgba(0,0,0,0.35);
+  }
+div.col.d-flex.justify-content-center ul{
+	list-style-type: none;
+	padding-left: 0px;
+	margin-bottom: 5px;
+}
+div.col.d-flex.justify-content-center ul li{
+	float: left;
+	padding: 0px 5px;
+}
+div.upload.container.mt-3.pt-3 form li{
+	list-style-type: none;
+}
+input#id_file {
+	display:none; /* アップロードボタンのスタイルを無効にする */
+}
+div.upload.container.mt-3.pt-3 form li label {	
+	border-radius: 2.5px;
+	color: #000000;
+	background-color: #ffffff;
+	padding: 5px;
+}
+hr{
+	/* background-color: #732673; */
+	background-color: #3f3f9e;
+}
+
+.bg-1 { 
+    color: #fff;
+	background-color: transparent;
+}
+

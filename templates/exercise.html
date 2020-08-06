@@ -1,0 +1,75 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="exercise-main py-1">
+  <div class="container m-1 p-1">
+	<a class="btn btn-primary btn-sm" href="{% url 'exercise' %}">練習を再スタートする</a>
+  </div>
+  <form class="container" method="POST">{% csrf_token %}
+	<p>まず、左の文を見て訳してみましょう。最初の数回はじっくり考えて構いません（15秒以内が目安です）。</p>
+	<p>次に、「正解をみる」で答えを確認し、どれぐらいできたかを選択して評価してください。</p>
+	<p>最後に、「評価を保存する」をクリックして練習１セットを完了します。</p>
+
+	<div class="container mt-2 pt-2">
+	  {% for ex, radio_eval in exercise_set %}
+	  <div class="container rounded mt-1 pt-2" id="exercise-area">
+		<div class="row">
+		  <div class="col-5 px-1">
+			<span class="font-weight-bold px-1">{{ forloop.counter }}.</span>
+			{% if ex.literary_style %}
+			(文章体){{ ex.question_text }}
+			{% else %}
+			{{ ex.question_text }}
+			{% endif %}
+		  </div>
+		  <div class="col-2 px-1 d-flex justify-content-center align-items-center">
+			<button class="btn btn-secondary btn-sm" id = "show_answer_{{ forloop.counter}}" type="button" onclick="display_answer({{ forloop.counter}})">正解をみる</button>
+			<script type="text/javascript">
+              function display_answer(target_id) {
+              var x = document.getElementById(`en_a_${target_id}`);
+              console.log(x.attributes);
+              if (x.style.visibility === "hidden") {
+              x.style.visibility = "visible";
+              document.getElementById(`show_answer_${target_id}`).innerText="答えを隠す";
+              } else {
+              x.style.visibility = "hidden";
+              document.getElementById(`show_answer_${target_id}`).innerText="正解をみる";
+              }
+              }
+            </script>
+		  </div>
+		  <div class="col-5">
+            <p class="px-1" id="en_a_{{ forloop.counter}}" style="visibility: hidden">{{ ex.answer_text|linebreaksbr }}</p>
+			{% if ex.answer_audio %}
+			<audio class="sentence_audio" controls>
+			  <source src="{{ ex.answer_audio.url }}" type="audio/mpeg">
+				  Your browser does not support the audio tag.
+			</audio>
+			{% endif %}
+		  </div>
+		</div>
+		<div class="row justify-content-end m-0 p-0">
+		  <div class="col d-flex justify-content-center m-0 p-0">
+			{{ radio_eval }}
+		  </div>  
+		</div>
+	  </div>
+	  {% endfor %}
+	  <div class="d-flex justify-content-center mt-2 pt-2">
+		<!-- <input class="btn btn-secondary btn m-1" type="submit" value="評価をリセットする"> -->
+		<input class="btn btn-success btn m-1" type="submit" value="評価を保存">
+	  </div>
+  </form>
+  <hr>
+  <div class="container d-flex align-items-center mt-3 pt-3">
+			  {% if user.is_authenticated %}
+			  <a class="btn btn-primary btn-sm align-middle" href="{% url 'dashboard' %}">ホームに戻る</a>
+			  {% else %}
+			  <a class="btn btn-primary btn-sm align-middle" href="{% url 'home' %}">ホームに戻る</a>
+			  {% endif %}
+  </div>
+  </div>
+</div>
+{% endblock content%}
+

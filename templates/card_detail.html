@@ -1,0 +1,56 @@
+{% extends "_base.html" %}
+
+{% block title %}Card Detail{% endblock title %}
+
+{% block content %}
+<div class="container mt-3 pt-3">
+  <h2>Card Detail</h2>
+  <div class="container rounded status p-2">
+	<h4> Card ID: {{ card.title }}</h4>
+	<a class="btn btn-secondary btn-sm align-middle" href="{% url 'card_list'%}">問題一覧に戻る</a>
+	{% if user.is_authenticated %}
+	<a class="btn btn-primary btn-sm align-middle" href="{% url 'card_edit' card.pk %}">問題を編集する</a>
+	<a class="btn btn-primary btn-sm align-middle" href="{% url 'card_delete' card.pk %}">問題を削除</a>
+	{% else %}
+	<a class="btn btn-primary btn-sm align-middle" href="{% url 'signup' %}">問題を編集する</a>
+	<a class="btn btn-primary btn-sm align-middle" href="{% url 'signup' %}">問題を削除</a>	
+	{% endif %}
+	<hr>
+	<div class="container">
+	  <div class="row">
+		<div class="col-8">
+		  <ul class="list-group list-group-flush bg-transparent">
+			<li class="list-group-item bg-transparent d-flex justify-content-betw
+een align-items-center">
+			  <span>カテゴリ：　{{ card.category }} / {{ card.subcategory }} / {{ card.detail }} </span>
+			  {% if card.literary_style %}
+			  <span>※文章体</span>
+			</li>
+			{% endif %}
+			</li>
+			<li class="list-group-item bg-transparent">問題の文（和文）：　{{ card.question_text }}</li>
+			<li class="list-group-item bg-transparent">答えの文（英文）：　{{ card.answer_text }}</li>
+			<li class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
+			  <span>作成日:　{{ card.creation_date|date:"Y/m/d (D) G:i"   }}</span></li>			
+		  </ul>
+		</div>
+		<div class="col-4">
+		  <ul class="list-group list-group-flush bg-transparent ">
+			<li class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
+			  習熟度
+			  <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+			  <span>{{ card.proficiency_score }}</span></li>
+			<li class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
+			  回答回数
+			  <span>{{ card.attempt_count }}
+			</span></li>
+			<li class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
+			  最終回答時間<span>{{ card.last_trial_date|date:"Y/m/d (D) G:i"  }}</span></li>
+		  </ul>
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>
+{% endblock content %}
+

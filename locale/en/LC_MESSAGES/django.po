@@ -1,0 +1,232 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-03 15:31+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: card/models.py:47 qr_grammar/models.py:47
+msgid "title"
+msgstr ""
+
+#: card/models.py:58 qr_grammar/models.py:56
+msgid "creation_date"
+msgstr ""
+
+#: card/models.py:60
+msgid "question_text"
+msgstr ""
+
+#: card/models.py:61
+msgid "answer_text"
+msgstr ""
+
+#: card/models.py:62
+msgid "answer_audio"
+msgstr ""
+
+#: card/models.py:67 qr_grammar/models.py:58
+msgid "category"
+msgstr ""
+
+#: card/models.py:71 qr_grammar/models.py:59
+msgid "subcategory"
+msgstr ""
+
+#: card/models.py:75 qr_grammar/models.py:63
+msgid "detail"
+msgstr ""
+
+#: card/models.py:76 qr_grammar/models.py:64
+msgid "literary_style"
+msgstr ""
+
+#: card/models.py:78 qr_grammar/models.py:71
+msgid "proficiency_score"
+msgstr ""
+
+#: card/models.py:79 qr_grammar/models.py:72
+msgid "attempt_count"
+msgstr ""
+
+#: card/models.py:81 qr_grammar/models.py:74
+msgid "last_trial_date"
+msgstr ""
+
+#: qr_grammar/models.py:65
+msgid "jp_sentence"
+msgstr ""
+
+#: qr_grammar/models.py:66
+msgid "foreign_sentence"
+msgstr ""
+
+#: qr_grammar/models.py:67
+msgid "foreign_sentence_audio"
+msgstr ""
+
+#: sla_app_project/settings.py:140
+msgid "Japanese"
+msgstr ""
+
+#: sla_app_project/settings.py:141
+msgid "English"
+msgstr ""
+
+#: templates/_base.html:24 templates/_base.html:29
+msgid "Flash Response"
+msgstr ""
+
+#: templates/_base.html:26
+msgid "Dashboard"
+msgstr ""
+
+#: templates/_base.html:27
+msgid "Log Out"
+msgstr ""
+
+#: templates/_base.html:30 templates/registration/login.html:15
+#: templates/signup.html:12
+msgid "Sign Up"
+msgstr ""
+
+#: templates/_base.html:31 templates/registration/login.html:11
+msgid "Log In"
+msgstr ""
+
+#: templates/card_delete.html:42
+msgid "Are you sure to delete this card?"
+msgstr ""
+
+#: templates/card_delete.html:45 templates/question_delete.html:45
+msgid "Delete"
+msgstr ""
+
+#: templates/card_edit.html:16 templates/question_edit.html:16
+msgid "Update"
+msgstr ""
+
+#: templates/card_new.html:15 templates/question_new.html:15
+msgid "Create"
+msgstr ""
+
+#: templates/dashboard.html:27
+msgid "Today's total attempts"
+msgstr ""
+
+#: templates/dashboard.html:30
+msgid "Current memory score"
+msgstr ""
+
+#: templates/dashboard.html:31
+msgid "Total number of questions"
+msgstr ""
+
+#: templates/dashboard.html:32
+msgid "Total number of attempts"
+msgstr ""
+
+#: templates/dashboard.html:33
+msgid "Average attempts per question"
+msgstr ""
+
+#: templates/question_delete.html:42
+msgid "Are you sure to delete this question?"
+msgstr ""
+
+#: templates/registration/logged_out.html:9
+msgid "You have been successfully logged out."
+msgstr ""
+
+#: templates/registration/login.html:13
+msgid "Forgot password?"
+msgstr ""
+
+#: templates/registration/login.html:14
+msgid "Don't have an account?"
+msgstr ""
+
+#: templates/registration/password_change_done.html:8
+msgid "Password changed"
+msgstr ""
+
+#: templates/registration/password_change_done.html:9
+msgid "You have been successfully changed you password."
+msgstr ""
+
+#: templates/registration/password_change_form.html:9
+msgid "Change your password"
+msgstr ""
+
+#: templates/registration/password_change_form.html:13
+msgid "Change"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:8
+msgid "Password"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:9
+msgid "You password has been set. You can login"
+msgstr ""
+
+#: templates/registration/password_reset_complete.html:9
+msgid "log in now"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:8
+#: templates/registration/password_reset_done.html:8
+msgid "Reset your password"
+msgstr ""
+
+#: templates/registration/password_reset_confirm.html:10
+msgid "Please enter your new password twice:"
+msgstr ""
+
+#: templates/registration/password_reset_done.html:9
+msgid "We've emailed you instructions for setting your password."
+msgstr ""
+
+#: templates/registration/password_reset_done.html:10
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with."
+msgstr ""
+
+#: templates/registration/password_reset_email.html:2
+#, python-format
+msgid ""
+"Someone asked for password reset for email %(email)s. Follow the link "
+"below:\n"
+"%(protocol)s://%(domain)s"
+msgstr ""
+
+#: templates/registration/password_reset_email.html:4
+#, python-format
+msgid "Your username, in case you've forgotten: %(user.get_username)s"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:9
+msgid "Forgot your password?"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:10
+msgid "Enter you email address below"
+msgstr ""
+
+#: templates/registration/password_reset_form.html:14
+msgid "Reset"
+msgstr ""

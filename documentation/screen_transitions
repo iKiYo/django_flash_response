@@ -1,0 +1,77 @@
+[Landing]
+description
+trial button
+sign up button
+log in button
+-
+trial button
+==> Trial exercise
+sign up button
+==> Sign up
+log in button
+==> Log in
+
+[Trial exercise]
+more exercise
+sign up
+-
+more exercise
+==> Trial exercise
+sign up
+==> Sign up
+
+
+[Log in]
+form
+forget
+-
+fill form
+==>Dashboard
+push forget
+==>password reset
+
+[Sign up]
+form
+-
+fill form
+==> Sign up confirmation
+
+[Sign up confirmation]
+dashboard button
+-
+dashboard button
+==> Dashboard
+
+[Dashboard]
+start button
+upload Qs
+-
+start button
+==> exercise
+upload Qs
+==> upload
+
+[password reset]
+email form
+-
+fill email form
+==> password reset sent
+
+[password reset sent]
+has sent message
+back button
+-
+back button
+==> Log in
+
+[upload]
+upload button
+-
+upload button
+upload complete
+
+[exercise]
+
+
+
+

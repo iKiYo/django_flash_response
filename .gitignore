@@ -1,0 +1,12 @@
+.env
+*~
+*#*#*
+*.backup
+*.log
+*.develop*
+*__pychache__*
+media
+AWS_user_info
+google_txt2spc.json
+application_default_credentials.json
+

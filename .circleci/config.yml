@@ -1,0 +1,92 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/circleci-test
+    docker:
+      - image: circleci/python:3.8-browsers
+        name: web
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+          DATABASE_URL: postgresql://root@db/circle_test?sslmode=disable
+      # Todo: make docker image of postgres 12 for test environment
+      - image: circleci/postgres:9.6.2
+        name: db
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circle_test
+          
+    steps:
+      - checkout
+      - run: sudo chown -R circleci:circleci /usr/local/bin
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.8/site-packages
+      - run: mkdir ~/circleci-test/test-results
+      - restore_cache:
+          keys:
+            - pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+            - pip-packages-v1-{{ .Branch }}-
+            - pip-packages-v1-
+      - run:
+          command: |
+            sudo pip install pipenv
+            pipenv install --system
+      - save_cache:
+          paths:
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.8/site-packages"
+          key: pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+
+      - run: 
+          name: Install gettext for localization 
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y gettext
+
+      - run:
+          name: Install google noto fonts
+          command: |
+            sudo apt-get install -y udev chromium
+            mkdir note
+            cd note
+            wget https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip
+            unzip NotoSansCJKjp-hinted.zip
+            sudo mkdir -p /usr/share/fonts/noto
+            sudo cp *.otf /usr/share/fonts/noto
+            sudo chmod 644 -R /usr/share/fonts/noto/
+            sudo fc-cache -fv
+            cd ~/circleci-test
+            rm -rf note
+              
+      - run:
+          command: |
+            python3 manage.py test
+            
+      # - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+      #     path: test-results
+      - store_artifacts:
+          path: ~/circleci-test/test-results
+          destination: tr1
+
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - checkout
+      - add_ssh_keys:
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST 'cd django_sla_app && git pull && sudo docker-compose up --build -d'
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+           - build
+          filters:
+            branches:
+              only: master
+              

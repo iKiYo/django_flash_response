@@ -1,0 +1,83 @@
+{% extends "_base.html" %}
+
+{% block title %}Question List{% endblock title %}
+
+{% block content %}
+<div class="container mt-2 pt-2">
+  <h2>Question List</h2>
+  <div class="container rounded status p-2">
+	{% if user.is_authenticated %}
+	<h4> {{user.username }}</h4>
+	<a class="btn btn-secondary btn-sm align-middle" href="{% url 'dashboard'%}">ホームに戻る</a>
+	<a class="btn btn-primary btn-sm align-middle" href="{% url 'question_new' %}">新規問題作成</a>
+	{% else %}
+	<h4>Guest User</h4>
+	<a class="btn btn-secondary btn-sm align-middle" href="{% url 'dashboard' %}">ホームに戻る</a>
+	<a class="btn btn-primary btn-sm align-middle" href="{% url 'signup' %}">新規問題作成</a>
+	{% endif %}
+	<form class="form-inline mt-2" action="{% url 'search_results' %}" method="get">
+	  <label for="q">キーワード検索：</label><input name="q" class="form-control rm-sm-2" type="text" placeholder="search" aria-label="Search">
+	</form>
+	<div class="pagination row justify-content-center">
+      <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+      </span>
+	</div>
+
+	<table class="table table-striped bg-1">
+	  <thead>
+		<tr>
+		  <th scope="col">問題名</th>
+		  <th></th>
+		  <th scope="col">カテゴリ ・ サブカテゴリ ・ 詳細</th>
+		  <th scope="col">問題文</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr>
+		  {% for q in questions %}
+		  <th scope="row">{{ q.title }}</th>
+		  <td>
+			<a class="btn btn-secondary btn-sm align-middle" href="{% url 'question_detail' q.question_id %}">詳細</a>
+			<!-- <a class="btn btn-primary btn-sm align-middle" href="{% url 'question_edit' q.question_id %}">編集</a> -->
+		  </td>
+		  <td>{{ q.category }} / {{ q.subcategory }} / {{ q.detail | truncatechars:10}} </td>
+		  <td>{{q.jp_sentence}}</td>
+		</tr>
+		{% endfor %}
+	  </tbody>
+	</table>
+	<div class="pagination row justify-content-center">
+	  <span class="step-links">
+		{% if page_obj.has_previous %}
+		<a href="?page=1">&laquo; first</a>
+		<a href="?page={{ page_obj.previous_page_number }}">previous</a>
+		{% endif %}
+
+		<span class="current">
+		  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+		</span>
+
+		{% if page_obj.has_next %}
+		<a href="?page={{ page_obj.next_page_number }}">next</a>
+		<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+		{% endif %}
+	  </span>
+	</div>
+
+  </div>
+</div>  
+{% endblock content %}
+

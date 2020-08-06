@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: gunicorn sla_app_project.wsgi --bind 0.0.0.0:8000
+    volumes:
+      - ./staticfiles:/code/staticfiles
+      - ./media:/code/media
+      - ./debugfiles:/code/debugfiles
+    expose:
+      - 8000
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - m_broker
+  db:
+    image: postgres:12
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+  nginx:
+    build: ./nginx
+    volumes: 
+      - ./staticfiles:/code/staticfiles
+      - ./media:/code/media
+      - ./debugfiles:/code/debugfiles
+    ports:
+      - '443:443'
+    depends_on:
+      - web
+  m_broker:
+    image: rabbitmq:3.8.5-management-alpine
+    ports:
+      - '5672:5672'
+      - '15672:15672' # management plugin's port
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    env_file:
+      - .env
+  async_worker:
+    build: .
+    command: celery -A sla_app_project worker -l info
+    volumes:
+      - ./staticfiles:/code/staticfiles
+      - ./media:/code/media
+      - ./debugfiles:/code/debugfiles
+    env_file:
+      - .env
+    depends_on:
+      - m_broker
+      - web
+
+volumes:
+  postgres_data:    
+  rabbitmq-data:
